@@ -6,6 +6,23 @@ class GuardianSpider(scrapy.Spider):
     allowed_domains = ["theguardian.com"]
     start_urls = ["https://theguardian.com"]
 
+    def parse_article(self, response):
+        title = response.meta["title"]
+        category = response.meta["category"]
+        url = response.meta["url"]
+        time = response.meta["time"]
+        author = response.css('a[rel="author"]::text').get()
+        paragraphs = response.css("div[data-gu-name='body'] p::text").getall()
+        article_text = " ".join(paragraphs)
+        yield{
+            "headline": title, 
+            "category": category, 
+            "author": author, 
+            "published_time": time, 
+            "article_text": article_text, 
+            "url": url
+        }
+        
     def parse(self, response):
         articles = response.css("div.dcr-mwwxk")
         for article in articles:
