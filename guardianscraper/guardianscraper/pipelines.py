@@ -12,8 +12,10 @@ class BigQueryPipeline:
 
     def process_item(self, item, spider):
         article_text = item.get("article_text", "")
-        if article_text.strip():
-            raise DropItem("Artigo vazio removido")
+        headline = item.get("headline", "")
+        url = item.get("url", "")
+        if not article_text.strip() or not headline.strip() or not url.strip():
+            raise DropItem("Artigo incompleto removido")
         self.rows.append({
             "headline": item["headline"],
             "category": item["category"],
