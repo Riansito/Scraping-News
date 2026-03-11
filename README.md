@@ -246,19 +246,8 @@ This project demonstrates several important concepts in data engineering:
 
 ---
 
-# Possible Improvements
-
-Future improvements could include:
-
-* Incremental crawling
-* Full text search indexing
-* Streaming ingestion
-* Scheduling pipelines with Airflow
-* Containerization with Docker
-
----
-
 # Author
 
 
 Rian Freires da Costa Silva
+
