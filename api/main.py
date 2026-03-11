@@ -15,7 +15,7 @@ def search_articles(key_word : str):
     query = f"""
         SELECT headline, author, url, article_text
         FROM `{TABLE}`
-        WHERE LOWER(headline) LIKE '%{key_word.lower()}%' AND LOWER(article_text) LIKE  '%{key_word.lower()}%'
+        WHERE REGEXP_CONTAINS(headline, r'(?i)\b{key_word}\b') or REGEXP_CONTAINS(article_text, r'(?i)\b{key_word}\b')
     """
 
     results = client.query(query).result()
@@ -28,7 +28,6 @@ def search_articles(key_word : str):
             "author": row.author,
             "url": row.url,
             "text": row.article_text,
-            
         })
 
     return articles
