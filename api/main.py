@@ -9,13 +9,13 @@ TABLE = "scrapy-489900.scrapydata.articles"
 
 app = FastAPI()
 
-@app.get("/search")
-def search_articles():
+@app.get("/search/{key_word}")
+def search_articles(key_word : str):
 
     query = f"""
         SELECT headline, author, url, article_text
         FROM `{TABLE}`
-        LIMIT 5
+        WHERE LOWER(headline) LIKE '%{key_word.lower()}%' AND LOWER(article_text) LIKE  '%{key_word.lower()}%'
     """
 
     results = client.query(query).result()
