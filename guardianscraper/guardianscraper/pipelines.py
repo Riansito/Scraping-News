@@ -9,13 +9,29 @@ class BigQueryPipeline:
         )
         self.table_id = "scrapy-489900.scrapydata.articles"
         self.rows = []
+        self.existing_urls = set()
+
+    def open_spider(self, spider):
+
+        query = f"SELECT url FROM `{self.table_id}`"
+
+        result = self.client.query(query).result()
+
+        self.existing_urls = {row.url for row in result}
+
+        spider.logger.info(f"{len(self.existing_urls)} URLs carregadas do banco")
 
     def process_item(self, item, spider):
         article_text = item.get("article_text", "")
         headline = item.get("headline", "")
         url = item.get("url", "")
+
         if not article_text.strip() or not headline.strip() or not url.strip():
             raise DropItem("Artigo incompleto removido")
+        
+        if url in self.existing_urls:
+            raise DropItem("Artigo repitido!")
+        
         self.rows.append({
             "headline": item["headline"],
             "category": item["category"],
@@ -24,6 +40,8 @@ class BigQueryPipeline:
             "article_text": item["article_text"],
             "url": item["url"]
         })
+
+        self.existing_urls.add(url)
 
         return item
 
