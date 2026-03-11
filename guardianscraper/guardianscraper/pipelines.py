@@ -1,4 +1,5 @@
 from google.cloud import bigquery
+from scrapy.exceptions import DropItem
 
 class BigQueryPipeline:
 
@@ -10,7 +11,9 @@ class BigQueryPipeline:
         self.rows = []
 
     def process_item(self, item, spider):
-
+        article_text = item.get("article_text", "")
+        if article_text.strip():
+            raise DropItem("Artigo vazio removido")
         self.rows.append({
             "headline": item["headline"],
             "category": item["category"],
