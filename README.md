@@ -196,7 +196,7 @@ pip install -r requirements.txt
 ## 2 Run the crawler
 
 ```bash
-scrapy crawl news_spider
+scrapy crawl guardian
 ```
 
 This will:
@@ -250,4 +250,5 @@ This project demonstrates several important concepts in data engineering:
 
 
 Rian Freires da Costa Silva
+
 
