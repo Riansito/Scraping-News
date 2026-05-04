@@ -114,7 +114,8 @@ The API reads data directly from BigQuery.
 
 ---
 
-<img width="1376" height="768" alt="Gemini_Generated_Image_l7h7f6l7h7f6l7h7" src="https://github.com/user-attachments/assets/056e65ff-d532-4409-91b7-72ef3dbd13cf" />
+<img width="1817" height="866" alt="aquitetura_scraping_news" src="https://github.com/user-attachments/assets/1a85209d-8af5-42c8-80eb-ba3a286b3d3d" />
+
 
 
 # API Endpoints
