@@ -114,6 +114,7 @@ The API reads data directly from BigQuery.
 
 ---
 
+## News Data Pipeline Architecture
 <img width="1817" height="866" alt="aquitetura_scraping_news" src="https://github.com/user-attachments/assets/1a85209d-8af5-42c8-80eb-ba3a286b3d3d" />
 
 
